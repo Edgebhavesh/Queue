@@ -1,0 +1,88 @@
+public class CustomQueue {
+    private int arr[];
+    private int front;
+    private int rear;
+    private int count;
+    private int capacity;
+
+    CustomQueue(int size)
+    {
+        this.arr=new int[size];
+        front=0;
+        rear=-1;
+        capacity=size;
+        count=0;
+    }
+
+    public void enqueue(int item) {
+        if(isfull())
+        {
+            System.out.println("Queue is full");
+            return ;
+        }
+        else{
+            rear=(rear+1)%capacity;
+            arr[rear]=item;
+            count++;
+            System.out.println("inserted successfully");
+            return;
+        }
+    }
+    private boolean isfull() {
+        if(count==capacity)
+        {
+            return true;
+        }
+        return false;
+    }
+    private boolean isempty() {
+        if(count==0)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void dequeue() {
+        if(isempty())
+        {
+            System.out.println("Queue is empty");
+            return ;
+        }
+        else{
+            int x=arr[front];
+            System.out.println("removed item is"+x);
+            front=(front+1)%capacity;
+            count--;
+        }
+    }
+    public void peek() {
+        if(isempty())
+        {
+          System.out.println("Queue is empty");
+        }
+        else
+        {
+            System.out.println("Element at peek is "+arr[front]);
+        }
+    }
+    public void size()
+    {
+        System.out.println("Size of Queue is "+count);
+    }
+}
+class Main{
+    public static void main(String [] args) {
+        CustomQueue q=new CustomQueue(2);
+        q.enqueue(1);
+        q.enqueue(2);
+        q.peek();
+        q.size();
+
+        // q.dequeue();
+        // q.dequeue();
+        // q.dequeue();
+        // q.dequeue();
+        
+
+    }
+}
