@@ -1,0 +1,76 @@
+ class circularqueue {
+    public int []arr;
+    protected int front=0;
+    protected int end=0;
+    protected int count=0;
+    protected int capacity=0;
+    
+    public circularqueue(int size){
+        this.capacity=size;
+        this.arr=new int[size];
+    }
+
+    private boolean isfull() {
+        if(count==arr.length)
+         return true;
+       return false;  
+    }
+    private boolean isempty() {
+        if(count==0)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void enqueue(int item) {
+        if(isfull())
+        {
+            System.out.println("queue is full");
+        }
+        else
+        {
+            count++;
+            arr[end]=item;
+            end=(end+1)%capacity;
+            System.out.println("inserted successfully");
+        }
+    }
+    public void dequeue() {
+        if(isempty())
+        {
+            System.out.println("queue is empty");
+        }
+        else{
+            count--;
+            int x=arr[front];
+            front=(front+1)%capacity;
+            System.out.println("element removed is "+x);
+        }
+    }
+    public void display(){
+        if(isempty())
+        {
+            System.out.println("queue is empty not to display");
+        }
+        else{
+            int i=front;
+            do{
+                System.out.println(arr[i]);
+                i=(i+1)%capacity;
+            }
+            while(i!=end);
+        }
+    }
+}
+ class Main{
+ public static void main(String[] args) {
+     circularqueue q=new circularqueue(3);
+     q.enqueue(1);
+     q.enqueue(2);
+     q.enqueue(3);
+     q.display();
+     q.dequeue();
+     q.dequeue();
+     q.display();
+ }
+} 
